@@ -54,7 +54,7 @@ var doWork3 = function () {
 	return [a, b, c];
 };
 
-var _doWork2 = doWork3(undefined, 4, 30);
+var _doWork2 = doWork3(undefined, 4, 35);
 
 var _doWork3 = _slicedToArray(_doWork2, 3);
 

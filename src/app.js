@@ -37,7 +37,7 @@ console.log('state = ' + state);
 var doWork3 = function(a = 5, b = 13, c = 21){
 	return [a, b, c];
 };
-let [a, b, c] = doWork3(undefined, 4, 30);
+let [a, b, c] = doWork3(undefined, 4, 35);
 console.log('\n');
 console.log('Destructuring array with function and default parameters');
 console.log('==================================');
