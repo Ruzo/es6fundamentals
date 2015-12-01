@@ -49,7 +49,7 @@ console.log('state = ' + state);
 var doWork3 = function () {
 	let a = arguments.length <= 0 || arguments[0] === undefined ? 5 : arguments[0];
 	let b = arguments.length <= 1 || arguments[1] === undefined ? 13 : arguments[1];
-	let c = arguments.length <= 2 || arguments[2] === undefined ? 21 : arguments[2];
+	let c = arguments.length <= 2 || arguments[2] === undefined ? 84 : arguments[2];
 
 	return [a, b, c];
 };
