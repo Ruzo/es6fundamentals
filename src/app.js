@@ -25,7 +25,7 @@
 			}
 		};
 	};
-	let {firstName: st, lastName: last, address: {city: city, state: state}} = doWork2();
+	let {firstName: first, lastName: last, address: {city: city, state: state}} = doWork2();
 	console.log('\n');
 	console.log('Destructuring object');
 	console.log('==================================');
@@ -45,6 +45,5 @@
 	console.log('a = ' + a);
 	console.log('b = ' + b);
 	console.log('c = ' + c);
-
 
 } ());
