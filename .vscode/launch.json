@@ -1,29 +1,31 @@
 {
 	"version": "0.2.0",
+	// array of all the different configurations
 	"configurations": [
 		{
-			"name": "Launch",
-			"type": "node",
-			"request": "launch",
-			"program": "dist/app.js",
-			"stopOnEntry": false,
-			"args": [],
-			"cwd": ".",
+			"name": "Launch",			// name showing up in the debug list
+			"type": "node",				// type of debugging - only 'node' and 'mono' for now
+			"request": "launch",		// 'launch' a file
+			"program": "src/app.js",	// file to be launched
+			"stopOnEntry": false,		// breakpoint at first line of app?
+			"args": [],					// array of command line arguments
+			"cwd": ".",					// current folder
 			"runtimeExecutable": null,
-			"runtimeArgs": [
-				"--nolazy"           
+			"runtimeArgs": [			// array of optional args passed to the runtime executable
+				"--nolazy"           	// tells node not to optimize for performance - no waiting
 			],
-			"env": {
+			"env": {					// environment variables
 				"NODE_ENV": "development"
 			},
 			"externalConsole": false,
-			"sourceMaps": true,
-			"outDir": null
+			"preLaunchTask": "",		// task from task.json to launch before start of debugging
+			"sourceMaps": true,			// used to match built file to original for walking through code
+			"outDir": "dist"			// folder where built files are saved at - will launch them instead
 		},
 		{
 			"name": "Attach",
 			"type": "node",
-			"request": "attach",
+			"request": "attach",		// attach to a running debugger
 			"port": 5858
 		}
 	]
