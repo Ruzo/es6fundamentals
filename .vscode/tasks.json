@@ -8,17 +8,28 @@
 
 {
 	"version": "0.1.0",
-	"command": "${workspaceRoot}/node_modules/.bin/babel",
+	"command": "${workspaceRoot}/node_modules/.bin/babel", // external program to run
 	"isShellCommand": true,
-	"args": ["src", "--out-dir", "dist","-w","--source-maps"],
-	"showOutput": "always",
+	"windows": { // OS specific configuration
+		"command": "babel"
+	},
+	// array of all different tasks to run with external program above
 	"tasks": [
 		{
-			"taskName": "watch",
+			"taskName": "babel-watch", // name by which task is listed
+			"args": ["src", "--out-dir", "dist","-w","--source-maps"], // args added to command line
 			"showOutput": "silent",
 			"suppressTaskName": true,
-			"isBuildCommand": true,
-			"isWatching": true
+			"isBuildCommand": true, // whether or not it's the task that runs by default as build command
+			"isWatching": true // does it keep running and watching for changes in the files?
+		},
+		{
+			"taskName": "babel",
+			"args": ["src", "--out-dir", "dist","--source-maps"], // another task with babel without watch option
+			"showOutput": "silent",
+			"suppressTaskName": true,
+			"isBuildCommand": false,
+			"isWatching": false
 		}
 	]
 }
