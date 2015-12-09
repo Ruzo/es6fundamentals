@@ -4,6 +4,8 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
 
+var _templateObject = _taggedTemplateLiteral(['', ' - Total hours:', ''], ['', ' - Total hours:', '']);
+
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
@@ -11,6 +13,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 (function () {
 	"use strict"
@@ -82,24 +86,36 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 	console.log('c = ' + c);
 
 	//Rest parameters and templates
+	var upper = function upper(strings) {
+		for (var _len = arguments.length, variables = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+			variables[_key - 1] = arguments[_key];
+		}
+
+		var text = "";
+		var v = 0;
+		strings.forEach(function (part) {
+			text += part === "" && v < variables.length ? variables[v++] : part;
+		});
+		return text.toUpperCase();
+	};
 	var doWork4 = function doWork4(name) {
 		var totalHours = 0;
 
-		for (var _len = arguments.length, hours = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-			hours[_key - 1] = arguments[_key];
+		for (var _len2 = arguments.length, hours = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+			hours[_key2 - 1] = arguments[_key2];
 		}
 
 		hours.forEach(function (hour) {
 			totalHours += hour;
 		});
-		return name + ' - Total hours:' + totalHours;
+		return upper(_templateObject, name, totalHours);
 	};
 	console.log('\n');
 	console.log('Rest parameters and templates');
 	console.log('=========================================');
-	console.log(doWork4('Richard', 5, 12, 6, 14, 8));
+	console.log(doWork4('Richard', 5, 12, 6, 14, 8, 3, 6));
 	console.log(doWork4('Dhillon', 8, 12, 6, 10, 8));
-	console.log(doWork4('Adeline', 9, 4, 11, 5, 10));
+	console.log(doWork4('Adeline', 9, 4, 11, 5, 10, 2));
 
 	// Spread parameters
 	var doWork5 = function doWork5(name, m, tu, w, th, f) {
@@ -113,6 +129,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 	var employee1 = ['Richard'].concat(hours1, [8]);
 	var employee2 = ['Dhillon'].concat(hours2);
 	var employee3 = ['Adeline'].concat(hours3, [5]);
+	console.log('\n');
 	console.log('Spread parameters');
 	console.log('=========================================');
 	console.log(doWork5.apply(undefined, _toConsumableArray(employee1)));

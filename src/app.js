@@ -47,19 +47,27 @@
 	console.log('c = ' + c);
 
 	//Rest parameters and templates
+	var upper = function(strings, ...variables){
+		let text = "";
+		let v = 0;
+		strings.forEach(part => {
+			text += (part === "" && v < variables.length) ? variables[v++] : part;
+		});
+		return text.toUpperCase();
+	};
 	let doWork4 = function(name, ...hours){
 		let totalHours = 0;
 		hours.forEach(function(hour){
 			totalHours += hour;
 		});
-		return `${name} - Total hours:${totalHours}`
+		return upper `${name} - Total hours:${totalHours}`
 	};
-		console.log('\n');
+	console.log('\n');
 	console.log('Rest parameters and templates');
 	console.log('=========================================');
-	console.log(doWork4('Richard', 5, 12, 6, 14, 8));
+	console.log(doWork4('Richard', 5, 12, 6, 14, 8, 3, 6));
 	console.log(doWork4('Dhillon', 8, 12, 6, 10, 8));
-	console.log(doWork4('Adeline', 9, 4, 11, 5, 10));
+	console.log(doWork4('Adeline', 9, 4, 11, 5, 10, 2));
 
 	// Spread parameters
 	let doWork5 = function(name, m,tu,w,th,f,ot=0){
@@ -71,6 +79,7 @@
 	let employee1 = ['Richard', ...hours1, 8];
 	let employee2 = ['Dhillon', ...hours2];
 	let employee3 = ['Adeline', ...hours3, 5];
+	console.log('\n');
 	console.log('Spread parameters');
 	console.log('=========================================');
 	console.log(doWork5(...employee1));
