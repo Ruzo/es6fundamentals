@@ -8,11 +8,8 @@
 
 {
 	"version": "0.1.0",
-	"command": "${workspaceRoot}/node_modules/.bin/babel", // external program to run
+	"command": "babel", // external program to run
 	"isShellCommand": true,
-	"windows": { // OS specific configuration
-		"command": "babel"
-	},
 	// array of all different tasks to run with external program above
 	"tasks": [
 		{
