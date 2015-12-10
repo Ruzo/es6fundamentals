@@ -153,4 +153,33 @@
 	console.log(`p1 name: ${p1.name} | ${p1.doWork()}`);
 	console.log(`e1 name: ${e1.name} | expertise: ${e1.expertise} | ${e1.doWork()}`);
  	console.log(`v1 name: ${v1.name} | expertise: ${v1.expertise} | ${v1.doWork()}`);
+	
+	
+	var ArrayIterator = function(_array){
+		var index = 0;
+		var next = () => {
+			return (index < _array.length) ? _array[index++] : {done: true};
+		}
+	}
+	
+	class MoneyOwed {
+		constructor(...amounts) {
+			this.amounts = amounts;
+		}
+		
+		get amounts(){
+			return this._amounts;
+		}
+		
+		set amounts(amounts) {
+			this._amounts = amounts;
+		}
+		
+		listAmounts(){
+			var iterator = new ArrayIterator(this.amounts);
+			while(!iterator.done){
+				console.log(iterator.next());
+			}
+		}
+	}
 }());
