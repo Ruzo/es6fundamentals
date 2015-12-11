@@ -262,20 +262,6 @@
 	}
 	{
 		// Custom Generator
-		class ArrayIterator {
-
-			constructor(array) {
-				this._array = array;
-				this.index = 0;
-			}
-
-			next() {
-				return (this.index < this._array.length)
-					? { value: this._array[this.index++], done: false }
-					: { value: undefined, done: true };
-			}
-		};
-
 		class Members {
 
 			constructor() {
@@ -300,6 +286,46 @@
 		let members = new Members();
 		members.addMembers('Rich', 'John', 'Pat', 'Joe', 'Gary', 'George');
 		for (let member of members) {
+			console.log(member);
+		};
+	}
+	{
+		// Custom Generator with filter and more
+		class Members {
+
+			constructor() {
+				this._members = [];
+			}
+
+			addMembers(...names) {
+				this._members = this._members.concat(names);
+			}
+
+			*[Symbol.iterator]() {
+				for (let member of this._members) {
+					console.log(`yielding ${member}`);
+					member.length == 3 ? yield member : null;
+					// yield member;
+				};
+			}
+
+		}
+
+		function* lengthFilter(list, len){
+			console.log(list);
+			for(let text of list){
+				console.log(`filtering ${text}`);
+				text.length == len ? yield text : null;
+			}
+		};
+
+		console.log('\n');
+		console.log('Custom Generator with filter and more');
+		console.log('=====================================');
+		let members = new Members();
+		members.addMembers('Rich', 'John', 'Pat', 'Joe', 'Gary', 'George');
+		for (let member of lengthFilter(members, 3
+		)) {
 			console.log(member);
 		};
 	}
