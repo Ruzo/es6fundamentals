@@ -92,7 +92,7 @@
 		console.log(doWork5(...employee3));
 	}
 	{
-		// Classes
+		// Classes with constructor, get & set, inheritence, super and overrides
 		class Person {
 			constructor(name) {
 				this.name = name;
@@ -303,18 +303,14 @@
 
 			*[Symbol.iterator]() {
 				for (let member of this._members) {
-					console.log(`yielding ${member}`);
-					member.length == 3 ? yield member : null;
-					// yield member;
+					yield member;
 				};
 			}
 
 		}
 
 		function* lengthFilter(list, len){
-			console.log(list);
 			for(let text of list){
-				console.log(`filtering ${text}`);
 				text.length == len ? yield text : null;
 			}
 		};
@@ -324,7 +320,7 @@
 		console.log('=====================================');
 		let members = new Members();
 		members.addMembers('Rich', 'John', 'Pat', 'Joe', 'Gary', 'George');
-		for (let member of lengthFilter(members, 3
+		for (let member of lengthFilter(members, 4
 		)) {
 			console.log(member);
 		};
