@@ -290,7 +290,7 @@
 		};
 	}
 	{
-		// Custom Generator with filter and more
+		// Custom Generator with filter
 		class Members {
 
 			constructor() {
@@ -316,12 +316,11 @@
 		};
 
 		console.log('\n');
-		console.log('Custom Generator with filter and more');
+		console.log('Custom Generator with filter');
 		console.log('=====================================');
 		let members = new Members();
 		members.addMembers('Rich', 'John', 'Pat', 'Joe', 'Gary', 'George');
-		for (let member of lengthFilter(members, 4
-		)) {
+		for (let member of lengthFilter(members, 4)) {
 			console.log(member);
 		};
 	}
