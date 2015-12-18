@@ -331,4 +331,12 @@
 
 		// console.log(comp);
 	}
+	{
+		let hexNum = 0x15;
+		let octalNum = 0o23;
+		let binNum = 0b1011;
+
+		console.log(`Hex number 0x15 = ${hexNum}`);
+		console.log(`Octal number 0o23 = ${octalNum}`);
+	}
 } ());
