@@ -333,10 +333,28 @@
 	}
 	{
 		let hexNum = 0x15;
-		let octalNum = 0o23;
-		let binNum = 0b1011;
-
+		let octalNum = 0o25;
+		let binNum = 0b10101;
+		let num123 = 123;
+		let string123 = '123';
+		let x = NaN;
+		console.log('\n');
+		console.log('The Number Object');
+		console.log('=====================================');
 		console.log(`Hex number 0x15 = ${hexNum}`);
-		console.log(`Octal number 0o23 = ${octalNum}`);
+		console.log(`Octal number 0o25 = ${octalNum}`);
+		console.log(`Binary number 0b10101 = ${binNum}`);
+		console.log('21 as Hex is ' + (21).toString(16));
+		console.log('21 as Octal is ' + (21).toString(8));
+		console.log('21 as Binary is ' + (21).toString(2));
+		console.log(`Number('0x15') = ${Number('0x15')}`);
+		console.log(`Number('0o25') = ${Number('0o25')}`);
+		console.log(`Number('0b10101') = ${Number('0b10101')}`);
+		console.log(`num123 is a number: ${Number.isFinite(num123)}`);
+		console.log(`string123 is a number: ${Number.isFinite(string123)}`);
+		console.log(`Even if x = NaN, x === NaN is ${x===NaN}`);
+		console.log(`However, Number.isNaN(x) is ${Number.isNaN(x)}`);
+		console.log(`EPSILON check: 0.2 + 0.1 === 0.3 is ${((0.2+0.1) - 0.3) < Number.EPSILON}`);
+		
 	}
 } ());
