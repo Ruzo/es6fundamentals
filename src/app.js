@@ -338,6 +338,7 @@
 		let num123 = 123;
 		let string123 = '123';
 		let x = NaN;
+    let price = 12.45782;
 		console.log('\n');
 		console.log('The Number Object');
 		console.log('=====================================');
@@ -354,7 +355,18 @@
 		console.log(`string123 is a number: ${Number.isFinite(string123)}`);
 		console.log(`Even if x = NaN, x === NaN is ${x===NaN}`);
 		console.log(`However, Number.isNaN(x) is ${Number.isNaN(x)}`);
+    console.log(`Number.parseInt('0030') is ${Number.parseInt('0030')}`);
+    console.log(`Number.parseFloat('003.50') is ${Number.parseFloat('003.50')}`);
+    console.log(`Number.isInteger(-10000) is ${Number.isInteger(-10000)}`);
+    console.log(`Number.isInteger('-10000') is ${Number.isInteger('-10000')}`);
+    console.log(`Number.isInteger(1.0) is ${Number.isInteger(1.0)}`);
+    console.log(`Number.isInteger(0.1) is ${Number.isInteger(0.1)}`);
+    console.log(`The maximum safe integer is ${Number.MAX_SAFE_INTEGER}`);
+    console.log(`Number.isSafeInteger(3.0) is ${Number.isSafeInteger(3.0)}`);
+    console.log(`Number.isSafeInteger(Infinity) is ${Number.isSafeInteger(Infinity)}`);
+    console.log(`Number.isSafeInteger(Math.pow(2,53)-1) is ${Number.isSafeInteger(Math.pow(2,53)-1)}`);
+    console.log(`Number.isSafeInteger(Math.pow(2,53)) is ${Number.isSafeInteger(Math.pow(2,53))}`);
 		console.log(`EPSILON check: 0.2 + 0.1 === 0.3 is ${((0.2+0.1) - 0.3) < Number.EPSILON}`);
-		
+    console.log(`$${price} toFixed with 2 decimals is $${price.toFixed(2)}`);
 	}
 } ());
