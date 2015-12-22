@@ -369,4 +369,22 @@
 		console.log(`EPSILON check: 0.2 + 0.1 === 0.3 is ${((0.2+0.1) - 0.3) < Number.EPSILON}`);
     console.log(`$${price} toFixed with 2 decimals is $${price.toFixed(2)}`);
 	}
+  {
+    const lowNum = 2500;
+    const highNum = 6000;
+		console.log('\n');
+    console.log('The Math Object');
+		console.log('=====================================');
+    console.log(`PI is ${Math.PI}`);
+    console.log(`Random integer between ${lowNum}-${highNum}: ${Math.floor((Math.random()*Math.floor(highNum-lowNum))+lowNum)}`);
+    console.log(`It's $12.52, let's make it an even $${Math.round(12.52)}? No.`);
+    console.log(`It's $12.48, let's make it an even $${Math.round(12.48)}? Sure.`);
+    console.log(`It's $12.63, which is precisely in 32Bit: $${Math.fround(12.63)}.\nHope you have my change in 32Bit.`);
+    console.log(`Actually, your change has the absolute value of ${Math.abs(null)}.`);
+    console.log(`Oh, look, $12.48 keeps rounding up to $${Math.ceil(12.48)}!`);
+    console.log(`I prefer $12.63 which can be truncated to $${Math.trunc(12.63)}. Thanks.`);
+    console.log(`We can go for the max of $12.52, $12.48 and $12.63 which is $${Math.max(12.52, 12.48, 12.63)}.`);
+    console.log(`Or the min which is $${Math.min(12.52, 12.48, 12.63)}.`);
+    console.log(`Tell you what, I'll go with the max ($${Math.max(12.52, 12.48, 12.63)}) and \npay you $${Math.sqrt(12.63)} for ${Math.sqrt(12.63)} months ;)`);
+  }
 } ());
