@@ -387,4 +387,38 @@
     console.log(`Or the min which is $${Math.min(12.52, 12.48, 12.63)}.`);
     console.log(`Tell you what, I'll go with the max ($${Math.max(12.52, 12.48, 12.63)}) and \npay you $${Math.sqrt(12.63)} for ${Math.sqrt(12.63)} months ;)`);
   }
+  {
+    let numArray = [1, 5, 7, 8, 11];
+    let myArray = new Array(1, 2, 3);
+    let newArray = new Array(3);
+    let ofArray = Array.of(3);
+    let entries = numArray.entries();
+    let keys = numArray.keys();
+    let values = numArray.values();
+		console.log('\n');
+    console.log('The Array Object');
+		console.log('=====================================');
+    console.log(`The even number in numArray[1, 5, 7, 8, 11] is: ${numArray.find(e => e%2 == 0)}`);
+    console.log(`The index of the even number in numArray[1, 5, 7, 8, 11] is: ${numArray.findIndex(e => e%2 == 0)}`);
+    console.log(`Let's fill [1, 5, 7, 8, 11] with 0s: [${[1, 5, 7, 8, 11].fill(0)}]`);
+    console.log(`Let's fill the second half of [1, 5, 7, 8, 11] with 0s: [${[1, 5, 7, 8, 11].fill(0, 3)}]`);
+    console.log(`Let's fill the first half of [1, 5, 7, 8, 11] with 0s: [${[1, 5, 7, 8, 11].fill(0, null, 2)}]`);
+    console.log(`Let's fill the middle of [1, 5, 7, 8, 11] with 0s: [${[1, 5, 7, 8, 11].fill(0, 1, 4)}]`);
+    console.log(`Let's fill 2nd and 3rd from last of [1, 5, 7, 8, 11] with 0s: [${[1, 5, 7, 8, 11].fill(0, -3, -1)}]`);
+    console.log(`Copy the last two elements over the first two of [1, 5, 7, 8, 11]: [${[1, 5, 7, 8, 11].copyWithin(0, 3)}]`);
+    console.log(`Copy the first two elements over the last two of [1, 5, 7, 8, 11]: [${[1, 5, 7, 8, 11].copyWithin(-2, 0, 3)}]`);
+    console.log(`new Array(1, 2, 3): [${myArray}]`);
+    console.log(`new Array(3): [${newArray}]`);
+    console.log(`Array.Of(3): [${ofArray}]`);
+    console.log(`Create an array from "ARRAY": [${Array.from("ARRAY")}]`);
+    console.log(`Create a new array from squares of [1, 2, 3]: [${Array.from([1,2,3], x => x * x)}]`);
+    console.log(`The first entry of numArray is: [${entries.next().value}]`);
+    console.log(`The second and third entries of numArray are: [${entries.next().value}] and [${entries.next().value}]`);
+    console.log(`The first, second and third keys of numArray are: [${keys.next().value}], [${keys.next().value}] and [${keys.next().value}]`);
+    console.log(`The first, second and third values of numArray are: [${values.next().value}], [${values.next().value}] and [${values.next().value}]`);
+    console.log(`The fact that every number in numArray is less than 15 is ${numArray.every(item => item < 15)}`);
+    console.log(`The fact that every number in numArray is even is ${numArray.every(item => item % 2 == 0)}`);
+    console.log(`The fact that some numbers in numArray is even is ${numArray.every(item => item % 2 == 0)}`);
+    console.log(`The fact that numArray includes 7 is ${numArray.includes(7)}`); // part of ES7
+  }
 } ());
