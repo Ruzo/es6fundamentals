@@ -421,4 +421,10 @@
     console.log(`The fact that some numbers in numArray is even is ${numArray.every(item => item % 2 == 0)}`);
     console.log(`The fact that numArray includes 7 is ${numArray.includes(7)}`); // part of ES7
   }
+  {
+    console.log('\n');
+    console.log('The Set Collection');
+		console.log('=====================================');
+
+  }
 } ());
