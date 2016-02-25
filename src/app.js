@@ -422,9 +422,22 @@
     console.log(`The fact that numArray includes 7 is ${numArray.includes(7)}`); // part of ES7
   }
   {
+    let obj = {firstName: "Richard", lastName: "Rouzeau"};
+    let set = new Set(['firstElement', 'secondOne', obj, 1]); // new set created from an array
+    set.add("1"); // add string '1' in addition to number '1' previously added
     console.log('\n');
     console.log('The Set Collection');
 		console.log('=====================================');
+    console.log(`The current size of the set is: ${set.size}`);
+    console.log(`List of items in set: `);
+    for(let item of set.values()){
+      let preText = Number.isFinite(item) ? '(Number) ' : ''; // label items that are real numbers
+      console.log(` ${preText}${item}`)
+      };
+    console.log(`set has string \"1\": ${set.has("1")}`);
+    console.log(`set has number 1: ${set.has(1)}`);
+    set.add('secondOne'); // adding an included item is ignored
+    console.log(`The set's size is still ${set.size} after trying to set.add(\'secondOne\') again`);
 
   }
-} ());
+}());
