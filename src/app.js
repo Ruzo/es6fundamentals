@@ -438,6 +438,76 @@
     console.log(`set has number 1: ${set.has(1)}`);
     set.add('secondOne'); // adding an included item is ignored
     console.log(`The set's size is still ${set.size} after trying to set.add(\'secondOne\') again`);
+    set.delete('1');
+    console.log(`List of items after set.delete(\'1\'):`);
+    for(let item of set.values()){
+      let preText = Number.isFinite(item) ? '(Number) ' : ''; // label items that are real numbers
+      console.log(` ${preText}${item}`)
+      };
+    let set2 = new Set(set); // duplicate set in set2
+    set.clear(); // clear all items from set
+    let set3 = new Set(set2.values()); // create set3 with set2 items using an iterator
+    set3.add(3).add('lastElement'); // chainable add
+    console.log(`List of items of set after set.clear():`);
+    for(let item of set.values()){
+      let preText = Number.isFinite(item) ? '(Number) ' : ''; // label items that are real numbers
+      console.log(` ${preText}${item}`)
+      };
+    console.log(`List of items of set2 (a duplicate of set):`);
+    for(let item of set2.values()){
+      let preText = Number.isFinite(item) ? '(Number) ' : ''; // label items that are real numbers
+      console.log(` ${preText}${item}`)
+      };
+    console.log(`List of items of set3 (created by iterating values of set2 and adding 2 items in chain):`);
+    for(let item of set3.values()){
+      let preText = Number.isFinite(item) ? '(Number) ' : ''; // label items that are real numbers
+      console.log(` ${preText}${item}`)
+      };
+    console.log(`set3 has the SQRT of 9 as an item: ${set3.has(Math.sqrt(9))}`);
 
+
+  }
+  {
+    let arr = [["Richard", 45], ["Dhillon", 3], ["Bernard", 40]];
+    let map = new Map(arr); // new Map created with an array of 2D (key, value) arrays
+    console.log('\n');
+    console.log('The Map Collection');
+		console.log('=====================================');
+    console.log(`The current size of the map is: ${map.size}`);
+    console.log(`List of items in map: `); // each item is displayed as an array
+    for(let item of map){
+      console.log(item);
+    }
+    let newName = 'Ahdeline';
+    map.set(newName, 44); // add a new item
+    console.log(`True or False, \'Ahdeline\' was added? ${map.has('Ahdeline')}`); // return true if exists
+    let map2 = new Map(map.entries()); // new Map created with iterator
+    let map3 = new Map();
+    for(let [key, value] of map2){
+      if(value != 40) map3.set(key, value); // add each item that does not have a value of 40 to map3
+    }
+    console.log(`Items in map2:`);
+    map2.forEach((value, key) => console.log('   '+key));
+    console.log(`Items in map3:`);
+    map3.forEach((value, key) => console.log('   '+key));
+    console.log(`Dhillon\'s age is: ${map.get('Dhillon')}`);
+    map.clear();
+    console.log(`Items still in map after clear(): ${map.size}`);
+    map3.delete(newName);
+    console.log(`True or False, \'Ahdeline\' is still in map3? ${map3.has(newName)}`);
+    let newArr = [...map2.keys()]; // new array using the spread operator
+    console.log(`A new array from the map2 keys: ${newArr}`);
+
+    let arr4Weak = Array.from([...map2], item => [{'Name': item[0]}, item[1]]);
+    console.log(arr4Weak);
+    console.log(`Let's create a WeakMap (wmap) from arr4Weak:`);
+    let wmap = new WeakMap(arr4Weak);
+    let richard = {Name:'Richard'};
+    console.log(`Richard's age is: ${wmap.get({Name:'Richard'})}`);
+    console.log(`Ahdeline is in wmap? ${wmap.has({Name:'Ahdeline'})}`);
+    console.log(`${wmap.set(map3, map3)}`);
+    console.log(`Here is the value of map3 added as an item: ${wmap.get(map3)}`);
+    console.log(`${wmap.delete({Name:'Bernard'})}`);
+    console.log(`\'Bernard\' was deleted? ${!wmap.has({Name:'Bernard'})}`);
   }
 }());
