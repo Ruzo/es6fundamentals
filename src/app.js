@@ -95,7 +95,8 @@
 		// Classes with constructor, get & set, inheritence, super and overrides
 		class Person {
 			constructor(name) {
-				this.name = name;
+				this._name = name;
+				// console.log(new.target.name); - not yet supported by VSC
 			}
 
 			get name() {
@@ -109,12 +110,16 @@
 			doWork() {
 				return "Doing work..."
 			}
+
+			static upper(text){
+				return text.toUpperCase();
+			}
 		}
 
 		class Employee extends Person {
 			constructor(name, expertise) {
 				super(name);
-				this.expertise = expertise;
+				this._expertise = expertise;
 			}
 
 			get expertise() {
@@ -133,7 +138,8 @@
 		class Volunteer extends Person {
 			constructor(name, expertise) {
 				super(name);
-				this.expertise = expertise;
+				this._expertise = expertise;
+				this.publicProperty = "Publicly Declared Property";
 			}
 
 			get expertise() {
@@ -149,19 +155,52 @@
 			}
 		}
 
-		let p1 = new Person("Patrick Schutt");
-		let e1 = new Employee("Richard Rouzeau", "Developer");
-		let v1 = new Volunteer("Bernard Rouzeau", "UX Designer");
 
 		console.log('\n');
 		console.log('Classes with constructor, get & set, inheritence, super and overrides');
 		console.log('=====================================================================');
-		console.log(`p1 name: ${p1.name} | ${p1.doWork() }`);
-		console.log(`e1 name: ${e1.name} | expertise: ${e1.expertise} | ${e1.doWork() }`);
-		console.log(`v1 name: ${v1.name} | expertise: ${v1.expertise} | ${v1.doWork() }`);
+		let p1 = new Person("Patrick Schutt");
+		let e1 = new Employee("Richard Rouzeau", "Developer");
+		let v1 = new Volunteer("Bernard Rouzeau", "UX Designer");
+		e1.name = "Richard Rouzeau2";
+		Person.prop = "static property";
+		console.log(`p1 name: ${p1.name} | ${p1.doWork()}`);
+		console.log(`e1 name: ${e1.name} | expertise: ${e1.expertise} | ${e1.doWork()}`);
+		console.log(`v1 name: ${v1.name} | expertise: ${v1.expertise} | ${v1.doWork()} | Public var data: ${v1.publicProperty}`);
+		console.log(`${Person.upper('Using static method Person.upper to convert this sentence to uppercased version.')}`);
+		console.log(`Person's prop is a : ${Person.prop}`);
 	}
 	{
-		// Symbol Iterator
+		// Symbols (secret unique ID that is completely unreadable)
+		let idWithString = Symbol('key');
+		let idWithString2 = Symbol('key');
+
+		let idForString = Symbol.for('unique key'); // will create a unique ID for that key, only if it isn't found in the Symbol registry
+		let idForString2 = Symbol.for('unique key');// ""
+
+		let idDescription = Symbol.keyFor(idForString);
+
+		let tempIdObject = {
+			name: 'Player1',
+			[Symbol.for('tempid')]: 'ID1234'
+		};
+		console.log('\n');
+		console.log('Classes with constructor, get & set, inheritence, super and overrides');
+		console.log('=====================================================================');
+		console.log(`OUTPUTTING SYMBOLS (Will never show actual symbol).`);
+		console.log(`idWithString with string 'key': ${idWithString.toString()}`);
+		console.log(`idWithString2 with string 'key': ${idWithString2.toString()}`);
+		console.log(`idWithString == idWithString2 is ${idWithString == idWithString2}`);
+		console.log(`idForString for string 'unique key': ${idForString.toString()}`);
+		console.log(`idForString2 for string 'unique key': ${idForString2.toString()}`);
+		console.log(`idForString == idForString2 is ${idForString == idForString2}`);
+		console.log(`Description for idForString symbol: ${idDescription}`);
+		console.log(`Value of Symbol.for('tempid') in tempIdObject: ${tempIdObject[Symbol.for('tempid')]}`);
+		console.log(`Symbols list of tempIdObject: ${Object.getOwnPropertySymbols(tempIdObject)}`);
+		// console.log(`What about Object.getOwnSymbols()? ${Object.getOwnSymbols()}`);
+	}
+	{
+		// Well-known symbols: Symbol Iterator
 		class MoneyOwed {
 			constructor(...amounts) {
 				this.amounts = amounts;
@@ -186,8 +225,8 @@
 		}
 
 		console.log('\n');
-		console.log('Symbol Iterator');
-		console.log('===============================');
+		console.log('Well-known symbols: Symbol Iterator');
+		console.log('===================================');
 		let moneyOwed = new MoneyOwed(245, 55, 87, 120, 387);
 		moneyOwed.listAmounts();
 	}
@@ -464,8 +503,6 @@
       console.log(` ${preText}${item}`)
       };
     console.log(`set3 has the SQRT of 9 as an item: ${set3.has(Math.sqrt(9))}`);
-
-
   }
   {
     let arr = [["Richard", 45], ["Dhillon", 3], ["Bernard", 40]];
@@ -510,4 +547,41 @@
     console.log(`${wmap.delete({Name:'Bernard'})}`);
     console.log(`\'Bernard\' was deleted? ${!wmap.has({Name:'Bernard'})}`);
   }
+	{
+		// The Promise Object
+		function doAsync(name, time = 2, rejected = false) {
+			let promise = new Promise(function(resolve, reject){
+				console.log(`Promise \"${name}\" launched.`);
+				setTimeout(function(){
+					if(rejected){
+						reject(`${name} rejected by choice after ${time} seconds.`);
+					}	else{
+						resolve({name: name, time: time});
+					}
+				}, time*1000);
+			});
+			return promise;
+		}
+		let thened = {
+			resolved: function(value){
+				console.log(`${value.name} resolved with time value of ${value.time}`);
+			},
+			rejected: function(reason){
+				console.log('Promise rejected, reason is: '+reason);
+			}
+		};
+		console.log('\n');
+    console.log('The Promise Object');
+		console.log('===============================================');
+		console.log(`doAsync(timeout seconds, rejected: true or false)`);
+		console.log('-------------------------------');
+		console.log(`Timeout = 2 seconds, resolving:`);
+		doAsync('Promise1').then(thened.resolved, thened.rejected);
+		console.log('-------------------------------');
+		console.log(`Timeout = 3 seconds, rejecting:`);
+		doAsync('Promise2',3, true).then(thened.resolved, thened.rejected);
+		console.log('---------------------------------------------');
+		console.log('Promise.all[2 sec resolving, 3 sec resolving]');
+		Promise.all([doAsync('PromiseAll-Promise1',2,false), doAsync('PromiseAll-Promise2',3,false)]).then(thened.resolved, thened.rejected);
+	}
 }());
