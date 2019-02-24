@@ -196,7 +196,7 @@
 		console.log(`idForString == idForString2 is ${idForString == idForString2}`);
 		console.log(`Description for idForString symbol: ${idDescription}`);
 		console.log(`Value of Symbol.for('tempid') in tempIdObject: ${tempIdObject[Symbol.for('tempid')]}`);
-		console.log(`Symbols list of tempIdObject: ${Object.getOwnPropertySymbols(tempIdObject)}`);
+		// console.log(`Symbols list of tempIdObject: ${Object.getOwnPropertySymbols(tempIdObject)}`);
 		// console.log(`What about Object.getOwnSymbols()? ${Object.getOwnSymbols()}`);
 	}
 	{
@@ -562,12 +562,25 @@
 			});
 			return promise;
 		}
+
 		let thened = {
-			resolved: function(value){
-				console.log(`${value.name} resolved with time value of ${value.time}`);
+			resolved: function(values){
+				if(Array.isArray(values)){
+					values.forEach(function(value){
+						console.log(`${value.name} resolved with time value of ${value.time}`);
+					});
+				}
+				else {
+					console.log(`${values.name} resolved with time value of ${values.time}`);
+				}
 			},
 			rejected: function(reason){
 				console.log('Promise rejected, reason is: '+reason);
+			}
+		};
+		let catched = {
+			error: function(e){
+				console.log(`Catched error: ${e}`);
 			}
 		};
 		console.log('\n');
@@ -575,13 +588,26 @@
 		console.log('===============================================');
 		console.log(`doAsync(timeout seconds, rejected: true or false)`);
 		console.log('-------------------------------');
-		console.log(`Timeout = 2 seconds, resolving:`);
+		console.log(`Timeout = 2 seconds, resolving`);
 		doAsync('Promise1').then(thened.resolved, thened.rejected);
 		console.log('-------------------------------');
-		console.log(`Timeout = 3 seconds, rejecting:`);
+		console.log(`Timeout = 3 seconds, rejecting`);
 		doAsync('Promise2',3, true).then(thened.resolved, thened.rejected);
 		console.log('---------------------------------------------');
-		console.log('Promise.all[2 sec resolving, 3 sec resolving]');
+		console.log('Promise.all([2 sec resolving, 3 sec resolving])'); // 2 seconds delay and then 3 seconds delay before logging results
 		Promise.all([doAsync('PromiseAll-Promise1',2,false), doAsync('PromiseAll-Promise2',3,false)]).then(thened.resolved, thened.rejected);
+		console.log('---------------------------------------------');
+		console.log('Promise.all([2 sec rejecting, 3 sec resolving])'); // Stops after 2 seconds because of the rejection
+		Promise.all([doAsync('PromiseAll2-Promise1',2,true), doAsync('PromiseAll2-Promise2',3,false)]).then(thened.resolved, thened.rejected);
+		console.log('-----------------------------------------------------------------');
+		console.log('Promise.race([2 sec rejecting, 3 sec resolving, 1 sec resolving])'); // Returns the fastest promise resolved or rejected
+		Promise.race([doAsync('Promise.race-Promise1',2,true), doAsync('Promise.race-Promise2',3,false), doAsync('Promise.race-Promise3',1,false)]).then(thened.resolved, thened.rejected);
+		console.log('-----------------------------------------------------------------');
+		console.log('Promise catch in chain with 4 sec resolving');
+		doAsync('Catch-Res',4,false).catch(catched.error).then(thened.resolved, thened.rejected);
+		console.log('-------------------------------');
+		console.log('Promise catch in chain with 4 sec rejecting');
+		doAsync('Catch-Rej',4,true).catch(catched.error).then(thened.resolved, thened.rejected);
+		console.log('-------------------------------');
 	}
 }());
